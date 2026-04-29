@@ -3,8 +3,13 @@ from PySide6.QtWidgets import QFileDialog,QListWidgetItem,QApplication
 from PySide6.QtCore import QSize,Qt
 from PySide6.QtGui import QPixmap, QIcon
 from pathlib import Path
+from peewee import SqliteDatabase
 from src.custom_logging import setup_logger
+
 loger = setup_logger(__name__)
+
+db = SqliteDatabase("gesichter.db")
+db.create_tables([])
 
 def start_select_folder(parent_widget):
     folder_path = select_folder(parent_widget)
