@@ -7,10 +7,15 @@ from src.custom_logging import setup_logger
 from a_ordner_auswählen import start_select_folder
 import os 
 
-os.remove("gesichter.db")
 
 
 loger = setup_logger(__name__)
+
+try:
+    os.remove("gesichter.db")
+except:
+    loger.info("No DB to Delete")
+
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
