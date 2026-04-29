@@ -9,9 +9,8 @@ db = SqliteDatabase("gesichter.db")
 app = FaceAnalysis(name='antelopev2')
 app.prepare(ctx_id=0)  # 0 = GPU, -1 = CPU
 
-def scan_all_imgs()
-# Bild laden
-img = cv2.imread("test.jpeg")
+
+img = cv2.imread("Bilder/IMG_20260118_112402.jpg")
 
 # Faces erkennen
 faces = app.get(img)
