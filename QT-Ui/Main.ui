@@ -1,0 +1,452 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>696</width>
+    <height>524</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Face Sort App</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: #222; color: #EEE;</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="tab_images">
+       <attribute name="title">
+        <string>Bilder</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="layout_tab1">
+        <item>
+         <widget class="QPushButton" name="btn_load_folder">
+          <property name="text">
+           <string>Ordner laden</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QWidget" name="widget" native="true">
+          <layout class="QHBoxLayout" name="horizontalLayout_2">
+           <item>
+            <widget class="QLabel" name="selected_folder">
+             <property name="text">
+              <string>Ausgewälter Ordner</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="selected_folder_path"/>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QListWidget" name="ordner_list_bilder">
+          <property name="iconSize">
+           <size>
+            <width>200</width>
+            <height>200</height>
+           </size>
+          </property>
+          <property name="resizeMode">
+           <enum>QListView::ResizeMode::Adjust</enum>
+          </property>
+          <property name="viewMode">
+           <enum>QListView::ViewMode::IconMode</enum>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_detection">
+       <attribute name="title">
+        <string>Erkennung</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="layout_tab2">
+        <item>
+         <widget class="QPushButton" name="btn_start_scan">
+          <property name="text">
+           <string>Erkennung starten</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QProgressBar" name="progressBar"/>
+        </item>
+        <item>
+         <widget class="QListWidget" name="listWidget"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_persons">
+       <attribute name="title">
+        <string>Personen</string>
+       </attribute>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <widget class="QListWidget" name="list_person_images">
+          <property name="viewMode">
+           <enum>QListView::ViewMode::IconMode</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="group_person_actions">
+          <property name="title">
+           <string>Aktionen</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_2">
+           <item>
+            <widget class="QPushButton" name="btn_set_primary">
+             <property name="text">
+              <string>Als Hauptbild</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="btn_delete_person">
+             <property name="text">
+              <string>Löschen</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="btn_merge_persons">
+             <property name="text">
+              <string>Zusammenführen</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="btn_rename_person">
+             <property name="text">
+              <string>Umbenennen</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QListWidget" name="list_persons"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_filter">
+       <attribute name="title">
+        <string>Filter / Suche</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="layout_tab4">
+        <item>
+         <widget class="QLabel" name="label_filter_select">
+          <property name="text">
+           <string>Person(en) auswählen:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QListWidget" name="list_search_persons">
+          <property name="selectionMode">
+           <enum>QAbstractItemView::SelectionMode::MultiSelection</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_person_count">
+          <property name="text">
+           <string>Anzahl Personen im Bild:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QSpinBox" name="spin_person_count_filter">
+          <property name="minimum">
+           <number>1</number>
+          </property>
+          <property name="maximum">
+           <number>10</number>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="layout_exclusive">
+          <item>
+           <widget class="QLabel" name="label_exclusive">
+            <property name="text">
+             <string>Option:</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QRadioButton" name="radio_only_selected">
+          <property name="text">
+           <string>Nur ausgewählte</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QRadioButton" name="radio_with_others">
+          <property name="text">
+           <string>Mit anderen</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btn_apply_search">
+          <property name="text">
+           <string>Suche ausführen</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QListWidget" name="list_search_results"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_correction">
+       <attribute name="title">
+        <string>Korrektur</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_3">
+        <item>
+         <layout class="QVBoxLayout" name="layout_correction_right">
+          <item>
+           <widget class="QLabel" name="label_preview">
+            <property name="text">
+             <string>Bildvorschau</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_image_preview">
+            <property name="frameShape">
+             <enum>QFrame::Shape::Box</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="layout_correction_actions">
+            <item>
+             <widget class="QLabel" name="label_assign">
+              <property name="text">
+               <string>Zuweisen an:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="combo_assign_person">
+              <item>
+               <property name="text">
+                <string>-- auswählen --</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="btn_assign">
+              <property name="text">
+               <string>Zuweisen</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="btn_ignore">
+              <property name="text">
+               <string>Ignorieren</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QListWidget" name="list_errors"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_export">
+       <attribute name="title">
+        <string>Export</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="layout_tab6">
+        <item>
+         <widget class="QRadioButton" name="radio_export_person">
+          <property name="text">
+           <string>Nach Person exportieren</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QListWidget" name="list_export_persons">
+          <property name="selectionMode">
+           <enum>QAbstractItemView::SelectionMode::MultiSelection</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QRadioButton" name="radio_export_filter">
+          <property name="text">
+           <string>Nach Filter exportieren</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btn_select_filter">
+          <property name="text">
+           <string>Filter wählen...</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_export_structure">
+          <property name="text">
+           <string>Ordnerstruktur:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="combo_folder_structure">
+          <item>
+           <property name="text">
+            <string>Name\\Bild</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Alle in einem Ordner</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btn_start_export">
+          <property name="text">
+           <string>Export starten</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_settings">
+       <attribute name="title">
+        <string>Einstellungen</string>
+       </attribute>
+       <layout class="QFormLayout" name="layout_tab7">
+        <item row="0" column="0">
+         <widget class="QLabel" name="label_db_path">
+          <property name="text">
+           <string>Datenbank-Pfad:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <layout class="QHBoxLayout" name="layout_db_path">
+          <item>
+           <widget class="QLineEdit" name="edit_db_path"/>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btn_browse_db">
+            <property name="text">
+             <string>Durchsuchen</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="label_model">
+          <property name="text">
+           <string>Modell:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QComboBox" name="combo_model">
+          <item>
+           <property name="text">
+            <string>Model v1</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Model v2</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="label_theme">
+          <property name="text">
+           <string>Thema:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QComboBox" name="combo_theme">
+          <item>
+           <property name="text">
+            <string>Hell</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Dunkel</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="QLabel" name="label_threads">
+          <property name="text">
+           <string>Threads:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="QSpinBox" name="spin_threads">
+          <property name="minimum">
+           <number>1</number>
+          </property>
+          <property name="maximum">
+           <number>32</number>
+          </property>
+          <property name="value">
+           <number>4</number>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>696</width>
+     <height>22</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
