@@ -4,7 +4,11 @@ from PySide6.QtCore import QCoreApplication
 from PySide6.QtUiTools import QUiLoader
 from pathlib import Path
 from src.custom_logging import setup_logger
-from ordner_auswählen import start_select_folder
+from a_ordner_auswählen import start_select_folder
+import os 
+
+os.remove("gesichter.db")
+
 
 loger = setup_logger(__name__)
 class MainWindow(QMainWindow):
