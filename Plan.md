@@ -1,10 +1,11 @@
 1. Bilder Tab
    1. Ordner laden
-      1. fade zu den bildern in einer db peichern
-   2. Thumbnail Grid
+      1. fade zu den bildern in der db speichern bild_name
+   2. Thumbnail Grid dynamisch laden und anzeigen lassen
    
 2. Erkennung Tab 
    1. Start Scan
+      1. 
    2. Fortschritt
    3. Einstellungen:
       1. Genauigkeit / Tolerance
