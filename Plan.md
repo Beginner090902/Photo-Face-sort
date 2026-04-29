@@ -1,7 +1,7 @@
 1. Bilder Tab
    1. Ordner laden
+      1. fade zu den bildern in einer db peichern
    2. Thumbnail Grid
-   3. Filter (Datum, Größe etc.)
    
 2. Erkennung Tab 
    1. Start Scan
