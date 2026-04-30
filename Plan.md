@@ -1,16 +1,18 @@
 1. Bilder Tab
    1. Ordner laden
-      1. fade zu den bildern in der db speichern bild_name
+      1. db im ordner erstellen
+      2. fade zu den bildern in der db speichern bild_name
    2. Thumbnail Grid dynamisch laden und anzeigen lassen
    
 2. Erkennung Tab 
    1. Start Scan
-      1. 
-   2. Fortschritt
+      1. Jedes bild scannen
+      2. gefundene gesichter speichern als gefundene_gesichter []  
+   2. Fortschritt 
+      1. anzeigen ber bar 
    3. Einstellungen:
-      1. Genauigkeit / Tolerance
-      2. GPU / CPU
-      3. Batch Größe
+      1. GPU / CPU
+      2. Batch Größe
 
 3. Personen Tab 
    1. Umbenennen!
