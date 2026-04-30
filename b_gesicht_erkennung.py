@@ -1,4 +1,4 @@
-from peewee import SqliteDatabase
+from peewee import *
 import cv2
 from insightface.app import FaceAnalysis
 
@@ -10,18 +10,26 @@ app = FaceAnalysis(name='antelopev2')
 app.prepare(ctx_id=0)  # 0 = GPU, -1 = CPU
 
 
-img = cv2.imread("Bilder/IMG_20260118_112402.jpg")
+img = cv2.imread("Bilder/aaa.jpg")
 
 # Faces erkennen
 faces = app.get(img)
+print("gesichter")
+print(faces)
 
-for face in faces:
-    print("Embedding Länge:", len(face.embedding))
-    print("Bounding Box:", face.bbox)
+def add_picture_gesichter_to_db(picture_name,db_path):
+    db = SqliteDatabase(db_path)
 
-    # Rechteck zeichnen
-    x1, y1, x2, y2 = map(int, face.bbox)
-    cv2.rectangle(img, (x1, y1), (x2, y2), (0,255,0), 2)
+    class BaseModel(Model):
+        class Meta:
+            database = db
 
-cv2.imshow("Result", img)
-cv2.waitKey(0)
+    class Bilder_daten(BaseModel):
+        name = CharField(unique=True)
+
+    class Gesicht(BaseModel):
+        bild = ForeignKeyField(Bilder_daten, backref='gesichter')
+        embedding = BlobField()  # Binary für numpy array
+        bbox = CharField()       # Als String speichern "x1,y1,x2,y2"
+        alter = IntegerField()
+        geschlecht = IntegerField()
