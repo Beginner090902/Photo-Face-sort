@@ -2,19 +2,12 @@ import sys
 from PySide6.QtWidgets import QApplication, QMainWindow, QFileDialog
 from PySide6.QtCore import QCoreApplication
 from PySide6.QtUiTools import QUiLoader
-from pathlib import Path
 from src.custom_logging import setup_logger
 from a_ordner_auswählen import start_select_folder
-import os 
-
 
 
 loger = setup_logger(__name__)
 
-try:
-    os.remove("gesichter.db")
-except:
-    loger.info("No DB to Delete")
 
 class MainWindow(QMainWindow):
     def __init__(self):
