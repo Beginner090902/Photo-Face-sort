@@ -15,6 +15,8 @@ loger = setup_logger(__name__)
 
 def start_select_folder(parent_widget):
     folder_path = select_folder(parent_widget)
+    if folder_path == None:
+        return
     db_path = add_db_to_folder(folder_path)
 
     Settingsdb = SettingsHandler(db_path)
@@ -60,6 +62,9 @@ def select_folder(parent_widget):
         "",
         QFileDialog.ShowDirsOnly
     )
+    if not folder:
+        loger.error("Kein Ordner wurde gewählt:")
+        return None
     loger.info(f"Der Ordner wurde gewählt: {folder}")
     return folder if folder else None
 
