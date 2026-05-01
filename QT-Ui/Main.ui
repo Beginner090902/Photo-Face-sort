@@ -6,9 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>696</width>
-    <height>524</height>
+    <width>684</width>
+    <height>510</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
   <property name="windowTitle">
    <string>Face Sort App</string>
@@ -17,9 +23,21 @@
    <string notr="true">background-color: #222; color: #EEE;</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout">
-    <item>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <layout class="QFormLayout" name="formLayout">
+    <item row="0" column="0" colspan="2">
      <widget class="QTabWidget" name="tabWidget">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>1</horstretch>
+        <verstretch>1</verstretch>
+       </sizepolicy>
+      </property>
       <property name="currentIndex">
        <number>0</number>
       </property>
@@ -27,16 +45,40 @@
        <attribute name="title">
         <string>Bilder</string>
        </attribute>
-       <layout class="QVBoxLayout" name="layout_tab1">
-        <item>
+       <layout class="QFormLayout" name="formLayout_3">
+        <item row="0" column="1">
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <item>
+           <widget class="QLabel" name="selected_folder">
+            <property name="text">
+             <string>Ausgewälter Ordner</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="selected_folder_path"/>
+          </item>
+         </layout>
+        </item>
+        <item row="1" column="1">
          <widget class="QPushButton" name="btn_load_folder">
           <property name="text">
            <string>Ordner laden</string>
           </property>
          </widget>
         </item>
-        <item>
-         <widget class="QProgressBar" name="ordner_loading_progressbar">
+        <item row="2" column="1">
+         <widget class="QProgressBar" name="ordner_loading_names_to_progressbar">
+          <property name="value">
+           <number>0</number>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="0">
+         <layout class="QVBoxLayout" name="verticalLayout"/>
+        </item>
+        <item row="5" column="1">
+         <widget class="QProgressBar" name="ordner_loading_pictures_progressbar">
           <property name="enabled">
            <bool>true</bool>
           </property>
@@ -45,24 +87,14 @@
           </property>
          </widget>
         </item>
-        <item>
-         <widget class="QWidget" name="widget" native="true">
-          <layout class="QHBoxLayout" name="horizontalLayout_2">
-           <item>
-            <widget class="QLabel" name="selected_folder">
-             <property name="text">
-              <string>Ausgewälter Ordner</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLineEdit" name="selected_folder_path"/>
-           </item>
-          </layout>
-         </widget>
-        </item>
-        <item>
+        <item row="6" column="1">
          <widget class="QListWidget" name="ordner_list_bilder">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>2</verstretch>
+           </sizepolicy>
+          </property>
           <property name="iconSize">
            <size>
             <width>200</width>
@@ -75,6 +107,41 @@
           <property name="viewMode">
            <enum>QListView::ViewMode::IconMode</enum>
           </property>
+         </widget>
+        </item>
+        <item row="4" column="1">
+         <widget class="QWidget" name="widget" native="true">
+          <layout class="QHBoxLayout" name="horizontalLayout_2">
+           <item>
+            <widget class="QPushButton" name="bilder_anzeigen">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>Bilder anzeigen</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="bilder_laden_meldung">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>Kein Ordner Geladen</string>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </widget>
         </item>
        </layout>
@@ -92,7 +159,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QProgressBar" name="progressBar"/>
+         <widget class="QProgressBar" name="progressBar_scan"/>
         </item>
         <item>
          <widget class="QListWidget" name="listWidget"/>
@@ -227,6 +294,12 @@
        </layout>
       </widget>
       <widget class="QWidget" name="tab_correction">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <attribute name="title">
         <string>Korrektur</string>
        </attribute>
@@ -352,32 +425,28 @@
        </layout>
       </widget>
       <widget class="QWidget" name="tab_settings">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <attribute name="title">
         <string>Einstellungen</string>
        </attribute>
-       <layout class="QFormLayout" name="layout_tab7">
+       <layout class="QFormLayout" name="formLayout_2">
         <item row="0" column="0">
-         <widget class="QLabel" name="label_gpu_or_cpu">
-          <property name="enabled">
-           <bool>false</bool>
-          </property>
+         <widget class="QLabel" name="einstellungen_nachrichten">
           <property name="text">
-           <string>Mode:</string>
+           <string>Nachrichten</string>
           </property>
          </widget>
         </item>
         <item row="0" column="1">
-         <widget class="QComboBox" name="combo_mode">
-          <item>
-           <property name="text">
-            <string>CPU</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>GPU</string>
-           </property>
-          </item>
+         <widget class="QLineEdit" name="einstellungen_nachrichten_text">
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
          </widget>
         </item>
         <item row="1" column="0">
@@ -400,6 +469,30 @@
           </property>
          </widget>
         </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="label_gpu_or_cpu">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>Mode:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QComboBox" name="combo_mode">
+          <item>
+           <property name="text">
+            <string>CPU</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>GPU</string>
+           </property>
+          </item>
+         </widget>
+        </item>
        </layout>
       </widget>
      </widget>
@@ -411,7 +504,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>696</width>
+     <width>684</width>
      <height>22</height>
     </rect>
    </property>
