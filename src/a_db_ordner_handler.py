@@ -48,7 +48,7 @@ class Bilder_daten_Handler:
                 bild.geschlecht = geschlecht
                 bild.save()
             
-            loger.info(f"{'Neu' if created else 'Aktualisiert'}: {name}")
+            loger.info(f"{'Bild Path Neu' if created else 'Aktualisiert'}: {name}")
             return bild
             
         except Exception as e:
