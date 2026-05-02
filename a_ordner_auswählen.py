@@ -7,6 +7,7 @@ from pathlib import Path
 from peewee import *
 from src.custom_logging import setup_logger
 from src.g_db_settings_handler import SettingsHandler
+from src.a_db_ordner_handler import Bilder_daten_Handler
 
 loger = setup_logger(__name__)
 
@@ -26,8 +27,9 @@ def start_select_folder(parent_widget):
 
     image_extensions = {'.jpg', '.jpeg', '.png', '.gif', '.bmp'}
     folder = Path(folder_path)
+
     # Alle Bilddateien sammeln
-    image_files = [f for f in folder.iterdir() 
+    image_files = [f for f in folder.glob('**/*') 
         if f.is_file() and f.suffix.lower() in image_extensions]
             # ProgressBar konfigurieren
     parent_widget.ordner_loading_names_to_progressbar.setMaximum(len(image_files))
@@ -42,7 +44,9 @@ def start_select_folder(parent_widget):
         QApplication.processEvents()
     
         image_name = str(file_path).replace(folder_path+"/","")
-        add_picture_names_to_db(picture_name=image_name,db_path=db_path)
+        bilder_db = Bilder_daten_Handler(db_path=db_path)
+        bilder_db.add_or_update_bild(name=image_name)
+        #add_picture_names_to_db(picture_name=image_name,db_path=db_path)
         # Fortschritt aktualisieren
         progress_value = i + 1
         parent_widget.ordner_loading_names_to_progressbar.setValue(progress_value)
@@ -127,7 +131,7 @@ def start_show_images_from_folder_in_qlistwidget(list_widget):
     folder = Path(folder_path)
     
     # Alle Bilddateien sammeln
-    image_files = [f for f in folder.iterdir() 
+    image_files = [f for f in folder.glob('**/*') 
                    if f.is_file() and f.suffix.lower() in image_extensions]
     #print(image_files)
     # Fortschritt in der Konsole (optional)
