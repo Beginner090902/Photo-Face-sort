@@ -1,7 +1,7 @@
 1. Bilder Tab
    1. Ordner laden
       1. db im ordner erstellen
-      2. fade zu den bildern in der db speichern bild_name
+      2. relativge fade zu den bildern in dem ordner in der db speichern bild_name
    2. Thumbnail Grid dynamisch laden und anzeigen lassen
    
 2. Erkennung Tab 
