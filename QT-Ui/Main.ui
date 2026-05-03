@@ -121,7 +121,7 @@
               </sizepolicy>
              </property>
              <property name="text">
-              <string>Bilder anzeigen</string>
+              <string>100 Bilder anzeigen</string>
              </property>
             </widget>
            </item>
