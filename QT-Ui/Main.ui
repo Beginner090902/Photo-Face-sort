@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>684</width>
-    <height>510</height>
+    <width>657</width>
+    <height>536</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -29,8 +29,8 @@
      <verstretch>0</verstretch>
     </sizepolicy>
    </property>
-   <layout class="QFormLayout" name="formLayout">
-    <item row="0" column="0" colspan="2">
+   <layout class="QVBoxLayout" name="verticalLayout_4">
+    <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -150,7 +150,7 @@
        <attribute name="title">
         <string>Erkennung</string>
        </attribute>
-       <layout class="QVBoxLayout" name="layout_tab2">
+       <layout class="QVBoxLayout" name="verticalLayout_5">
         <item>
          <widget class="QPushButton" name="btn_start_scan">
           <property name="text">
@@ -159,10 +159,54 @@
          </widget>
         </item>
         <item>
-         <widget class="QProgressBar" name="progressBar_scan"/>
+         <widget class="QProgressBar" name="scan_progressBar"/>
         </item>
         <item>
-         <widget class="QListWidget" name="listWidget"/>
+         <layout class="QGridLayout" name="gridLayout">
+          <property name="spacing">
+           <number>2</number>
+          </property>
+          <item row="0" column="0">
+           <widget class="QLabel" name="scan_aktuelles_bild_label">
+            <property name="text">
+             <string>Aktuelles Bild</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignmentFlag::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLabel" name="scan_gefundene_gesichter_vorschau_label">
+            <property name="text">
+             <string>Gefundene Gesichter vorschau</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignmentFlag::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QListWidget" name="scan_aktuelles_bild_vorschau">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="MinimumExpanding" vsizetype="Expanding">
+              <horstretch>2</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QListWidget" name="scan_gefundene_gesichter_vorschau">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="MinimumExpanding" vsizetype="Expanding">
+              <horstretch>2</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
        </layout>
       </widget>
@@ -504,7 +548,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>684</width>
+     <width>657</width>
      <height>22</height>
     </rect>
    </property>
