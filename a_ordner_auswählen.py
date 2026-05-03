@@ -1,3 +1,4 @@
+from cv2.detail import VoronoiSeamFinder
 from os import replace
 from sre_constants import BIGCHARSET
 from PySide6.QtWidgets import QFileDialog,QListWidgetItem,QApplication
@@ -111,29 +112,22 @@ def add_picture_names_to_db(picture_name,db_path):
         name=picture_name)
 
     
-
-def start_show_images_from_folder_in_qlistwidget(list_widget):
+def start_show_images_from_folder_in_qlistwidget(list_widget,bilder_zum_anzeigen):
+    loger.info(f"anzahl der bilder die angezeit werden sollen {bilder_zum_anzeigen}")
     folder_path = list_widget.selected_folder_path.text()
-    if not folder_path:
-        loger.error(f"Kein Ordner Gelden")
-        list_widget.bilder_laden_meldung.setVisible(True)
-        return
-    list_widget.bilder_laden_meldung.setVisible(False)
-    db_path = folder_path+"/db.db"
-    """Zeigt Bilder mit Fortschrittsanzeige an"""
-    if not folder_path:
-        loger.error("No Folder Path")
-        return
+    db_path = f"{folder_path}/db.db"
+
+    bilder_db = Bilder_daten_Handler(db_path=db_path)
     
-    list_widget.ordner_list_bilder.clear()
+    image_files = bilder_db.get_all_bilder()
+    ende_der_bilder_index = bilder_zum_anzeigen
+    if len(image_files)< bilder_zum_anzeigen:
+        ende_der_bilder_index = len(image_files)
+
+    loger.info(f"Anzahl der Bilder {len(image_files)}")
+    loger.info(f"Ende index für das anzeigen der bilder {ende_der_bilder_index}")
+    image_files = image_files[:ende_der_bilder_index]
     
-    image_extensions = {'.jpg', '.jpeg', '.png', '.gif', '.bmp'}
-    folder = Path(folder_path)
-    
-    # Alle Bilddateien sammeln
-    image_files = [f for f in folder.glob('**/*') 
-                   if f.is_file() and f.suffix.lower() in image_extensions]
-    #print(image_files)
     # Fortschritt in der Konsole (optional)
     loger.info(f"Lade {len(image_files)} Bilder...")
 
@@ -142,26 +136,31 @@ def start_show_images_from_folder_in_qlistwidget(list_widget):
     list_widget.ordner_loading_pictures_progressbar.setMinimum(0)
     list_widget.ordner_loading_pictures_progressbar.setValue(0)
     list_widget.ordner_loading_pictures_progressbar.setVisible(True)
-    
-    # Optional: Text-Format für Prozentanzeige
     list_widget.ordner_loading_pictures_progressbar.setFormat("%p% - %v von %m Bildern")
-    for i, file_path in enumerate(image_files):
-        pixmap = QPixmap(str(file_path))
+    
+    list_widget.ordner_list_bilder.clear()
+
+    for i, bild_obj in enumerate(image_files):
+        file_path = bild_obj.name
+        real_file_path = f"{folder_path}/{file_path}"
+        loger.info(f"Bild Path {real_file_path}")
+        pixmap = QPixmap(str(real_file_path))
         if not pixmap.isNull():
             scaled_pixmap = pixmap.scaled(100, 100, Qt.KeepAspectRatio, Qt.SmoothTransformation)
             
             item = QListWidgetItem()
             item.setIcon(QIcon(scaled_pixmap))
-            item.setText(file_path.name)
+            item.setText(file_path)
             list_widget.ordner_list_bilder.addItem(item)
             
             # Ermöglicht UI-Updates während des Ladens
             QApplication.processEvents()
-        
-        image_name = str(file_path).replace(folder_path+"/","")
-        add_picture_names_to_db(picture_name=image_name,db_path=db_path)
+        else:
+            return
+
         # Fortschritt aktualisieren
         progress_value = i + 1
+        
         list_widget.ordner_loading_pictures_progressbar.setValue(progress_value)
 
 
