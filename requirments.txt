@@ -4,3 +4,4 @@ opencv-python
 onnxruntime-gpu
 peewee
 pyside6
+pyinstaller
