@@ -116,7 +116,16 @@ def start_show_images_from_folder_in_qlistwidget(list_widget,bilder_zum_anzeigen
     loger.info(f"anzahl der bilder die angezeit werden sollen {bilder_zum_anzeigen}")
     folder_path = list_widget.selected_folder_path.text()
     db_path = f"{folder_path}/db.db"
-
+    if not folder_path:
+        loger.error(f"Kein Ordner Gelden")
+        list_widget.bilder_laden_meldung.setVisible(True)
+        return
+    list_widget.bilder_laden_meldung.setVisible(False)
+    db_path = folder_path+"/db.db"
+    """Zeigt Bilder mit Fortschrittsanzeige an"""
+    if not folder_path:
+        loger.error("No Folder Path")
+        return
     bilder_db = Bilder_daten_Handler(db_path=db_path)
     
     image_files = bilder_db.get_all_bilder()
