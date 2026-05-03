@@ -43,7 +43,7 @@ def starte_gesicht_erkennung_alle(ui):
     elif settings_db.mode == "GPU":  # elif statt if
         mode = 0
     else:
-        loger.error(f"un plausible einstellung CPU oder GPU modus aus DB: {settings_db.mode}")
+        loger.error(f"unplausible einstellung CPU oder GPU modus aus DB: {settings_db.mode}")
         return
     
     app.prepare(ctx_id=mode)
@@ -60,7 +60,6 @@ def starte_gesicht_erkennung_alle(ui):
         x1, y1, x2, y2 = map(int, face.bbox)
         cv2.rectangle(img, (x1, y1), (x2, y2), (0, 255, 0), 8)
 
-    # 5. *** DAS FEHLTE: BILD MIT RECTANGLES IN label_2 ANZEIGEN ***
     # Konvertiere OpenCV-Bild (BGR) zu QPixmap
     img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     h, w, ch = img_rgb.shape
@@ -69,7 +68,8 @@ def starte_gesicht_erkennung_alle(ui):
     modifizierte_pixmap = QPixmap.fromImage(qt_image)
     scalier_und_anzeigen_in_objekt(element=ui.label_2,pixmap=modifizierte_pixmap)
 
-    print(f"Bild mit {len(faces)} Gesichtern in label_2 angezeigt")
+    loger.info(f"Bild mit {len(faces)} Gesichtern erkannt")
+    
 
 def scalier_und_anzeigen_in_objekt(element,pixmap):
     element.setScaledContents(False)
