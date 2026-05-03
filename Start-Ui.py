@@ -1,11 +1,12 @@
 import sys
+import os
 from PySide6.QtWidgets import QApplication, QMainWindow, QFileDialog
 #from PySide6.QtCore import QCoreApplication
 from PySide6.QtUiTools import QUiLoader
 from src.custom_logging import setup_logger
 from a_ordner_auswählen import start_select_folder, start_show_images_from_folder_in_qlistwidget
 from src.g_db_settings_handler import SettingsHandler
-
+from resource_path import resource_path
 
 loger = setup_logger(__name__)
 
@@ -14,16 +15,19 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         
+        
+
         # UI laden (passen Sie den Dateinamen an)
         loader = QUiLoader()
-        self.ui = loader.load('QT-Ui/Main.ui')
+        self.ui = loader.load(resource_path("QT-Ui/Main.ui"))
+
         loger.info("UI geladen")
         self.ui.show()
         
-
+        gesammt_anzahl_zu_ladener_bilder= 100
         # Bilder
         self.ui.btn_load_folder.clicked.connect(lambda: start_select_folder(self.ui))
-        self.ui.bilder_anzeigen.clicked.connect(lambda: start_show_images_from_folder_in_qlistwidget(self.ui))
+        self.ui.bilder_anzeigen.clicked.connect(lambda: start_show_images_from_folder_in_qlistwidget(self.ui,gesammt_anzahl_zu_ladener_bilder))
         self.ui.bilder_laden_meldung.setVisible(False)
 
         # Einstellungen
@@ -87,6 +91,7 @@ class MainWindow(QMainWindow):
 
                 self.ui.combo_mode.setCurrentText(mode) 
                 self.ui.spin_threads.setValue(threads)
+
 
 
 if __name__ == '__main__':
